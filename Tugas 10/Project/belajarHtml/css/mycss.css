@@ -1,0 +1,157 @@
+/* @font-face {
+    font-family: myFont;
+    src: url(font/Heebo-VariableFont_wght.ttf);
+} */
+
+
+body{
+    padding:0px;
+    margin: 0px;
+    /* font-family: myFont; */
+}
+button{
+    padding:15px; 
+    background:rgb(238, 139, 26); 
+    color:white; border:none; 
+    border-radius:5px; 
+    font-size:16px; 
+    font-weight: bold;
+}
+
+button:hover{
+    background:#FF8C00; 
+    transition-duration: 0.5s;
+}
+h2{
+    color :rgb(14, 72, 182);
+    font-size: 40px;
+}
+h3{
+    color :rgb(238, 139, 26);
+}
+
+#banner{
+    margin: 0px;
+    background : linear-gradient(45deg, rgb(32, 78, 163),rgb(24, 97, 233));
+    padding : 100px 100px 100px 100px;
+    color:white;
+    display: flex;
+    justify-content: space-around;
+    border-bottom-left-radius : 80px;
+}
+
+#pertama{
+    width: 60%;
+}
+#pertama h1{
+    font-size:60px;
+}
+
+#pertama div{
+    display: flex;
+    flex-direction: row;
+}
+
+#pertama ul{
+    font-size:20px;
+    list-style: none;
+    margin-bottom: 60px;
+}
+
+#pertama ul li::before {
+    content: "\2022";
+    color: rgb(243, 149, 42);
+    font-weight: bold;
+    display: inline-block; 
+    width: 1em;
+    margin-left: -1em;
+    padding: 5px;
+}
+
+
+menu{
+    position: fixed;
+    top:0px;
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    margin:0px;
+    padding: 20px 50px 20px 50px;
+}
+menuitem{
+    padding: 10px;
+    color:white;
+    font-size: 20px;
+}
+
+
+
+#section1{
+    display: flex;
+    flex-direction: row;
+    padding: 100px;
+}
+#section1 div{
+    padding: 180px 100px 100px 100px;
+}
+
+#section1 div h1{
+    font-size: 38px;
+    
+}
+
+#section1 div p{
+    font-size: 25px;
+    color: rgb(77, 75, 75);
+}
+
+
+#section2{
+    padding: 140px;
+}
+
+#section2 h1{
+    font-size: 40px;
+}
+#section2 p{
+    font-size: 25px;
+    color: rgb(77, 75, 75);
+}
+
+#section3 {
+    padding: 140px;
+    padding-top:10px;
+}
+.jejer{
+    display: flex;
+}
+.jejer h2{
+    width: 15%;
+    font-size:55px
+}
+.jejer div{
+    width: 85%;
+}
+.jejer div h3{
+    font-size: 26px;
+    
+}
+.jejer div p{
+    font-size: 20px;
+    color: rgb(77, 75, 75);
+}
+
+
+
+#section4{
+    padding:80px;
+    background: rgb(243, 230, 205);
+    text-align: center;
+}
+#section4 div{
+    width:50px;
+    height:5px;
+    background: rgb(14, 72, 182);
+    position: absolute;
+    left:48%;
+}

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="materialize.css">   
+  </head>
+  <body class="row" style="padding-top: 60px;">
+
+    <style>
+      .myForm{
+        padding: 30px!important;
+        margin-top: 30px;
+        border:silver 1px solid;
+        border-radius: 25px;
+      }
+    </style>
+
+    <div class="col s8 push-s2" style="padding: 60px 30px 30px 60px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-bottom: 3px rgb(0, 140, 255) solid;">
+      <h4>Program Aplikasi Tree</h4>
+
+      <!-- Navigation -->
+      <div class="col s12">
+        <div class="col s4 red btn" onclick="showForm('rootForm')">Reset Tree</div>
+        <div class="col s4 blue btn" onclick="showForm('insertForm')">Insert Data</div>
+        <div class="col s4 orange btn" onclick="showForm('deleteForm')">Delete Data</div>
+      </div>
+      <!-- End of Navigation -->
+
+      <!-- Root Form -->
+      <div class="col s12 myForm" id="rootForm" style="display: block;">
+        <div class="input-field col s5">
+          <input id="rootValue" type="text">
+          <label for="rootValue" class="active">Insert New Root Value</label>
+        </div>
+        <div class="input-field col s5">
+          <select class="browser-default" id="transverseValue">
+            <option value="" disabled selected>Choose Transverse</option>
+            <option value="BF">Breadth First</option>
+            <option value="DF">Deep First</option>
+          </select>
+        </div>
+        <div class="col s2">
+          <div class="btn red" onclick="addNewRoot()">Reset</div>
+        </div>
+      </div>
+      <!-- End of Root Form -->
+
+      <!-- Insert Form -->
+      <div class="col s12 myForm" id="insertForm" style="display: none;">
+        <div class="input-field col s6">
+          <input id="insertChildValue" type="text">
+          <label for="insertChildValue" class="active">Insert New Child</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="insertParentValue" type="text">
+          <label for="insertParentValue" class="active">Type Parent</label>
+        </div>
+        <div class="col s12">
+          <div class="btn blue col s10 push-s1" onclick="addNewChild()">Insert</div>
+        </div>
+      </div>
+      <!-- End of Insert Form -->
+
+      <!-- Delete Form -->
+      <div class="col s12 myForm" id="deleteForm" style="display: none;">
+        <div class="input-field col s6">
+          <input id="deleteChildValue" type="text">
+          <label for="deleteChildValue" class="active">Delete Child</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="deleteParentValue" type="text">
+          <label for="deleteParentValue" class="active">Type Parent</label>
+        </div>
+        <div class="col s12">
+          <div class="btn orange col s10 push-s1" onclick="removeNode()">Delete</div>
+        </div>
+      </div>
+      <!-- End of Delete Form -->
+
+      <!-- Display Tree -->
+      <div class="col s12" id="viewData">
+        
+      </div> 
+      <!-- End of display tree -->
+
+    </div>
+    
+    <script src="myTree.js"></script>
+    <script>
+
+      // ====================== Tree Management Function ===============================
+
+      var tree,newRoot="";
+      var myArray = [], foundData=[];
+      var transverse, fixText="";
+
+      function displayData(x,tab){
+        
+          fixText+="<p style='padding-left:"+(tab*20)+"px!important ;' >&#8618;"+x["data"]+"</p>";
+          if(x["children"].length > 0)
+            x["children"].forEach(element => {
+              displayData(element,(tab+1));
+            });
+            
+        
+      }
+
+      function addNewRoot(){
+        newRoot = document.getElementById("rootValue").value;
+        transverse = document.getElementById("transverseValue").value;
+
+        if (newRoot == "")
+          alert("Please fill the form");
+        else
+          tree = new Tree(newRoot);
+
+        showData();
+      }
+
+      function addNewChild(){
+        var childValue = document.getElementById("insertChildValue").value;
+        var parentValue = document.getElementById("insertParentValue").value;
+
+        if (childValue=="" || parentValue=="")
+          alert("Please fill the form");
+        else
+          transverse == "BF" ?  tree.add(childValue, parentValue, tree.traverseBF) :  tree.add(childValue, parentValue, tree.traverseDF);  
+
+        showData();
+      }
+
+      function removeNode(){
+        var childValue = document.getElementById("deleteChildValue").value;
+        var parentValue = document.getElementById("deleteParentValue").value;
+
+        if (childValue=="" || parentValue=="")
+          alert("Please fill the form");
+        else
+          transverse == "BF" ?  tree.remove(childValue, parentValue, tree.traverseBF) :  tree.remove(childValue, parentValue, tree.traverseDF);  
+
+        showData();
+      }
+
+      function showData(){
+        transverse == "BF" ?
+          tree.contains(function(node){
+              if (node.data === newRoot) {
+                foundData=node;
+              }
+          }, tree.traverseBF) 
+        :
+          tree.contains(function(node){
+              if (node.data === newRoot) {
+                foundData=node;
+              }
+          }, tree.traverseDF);
+
+        // console.log(foundData);
+        fixText="";
+        displayData(foundData,0);
+        
+        document.getElementById("viewData").innerHTML=fixText;
+      }
+
+      // ======================= End of Tree Management Function =======================
+
+      // Form Function
+      function showForm(x){
+        if(newRoot=="")
+          alert("Please fill the root first")
+        else{
+          document.getElementById("rootForm").style.display = "none";
+          document.getElementById("insertForm").style.display = "none";
+          document.getElementById("deleteForm").style.display = "none";
+
+          document.getElementById(x).style.display = "block";    
+        }    
+      }
+      // end of Form function
+    </script>
+    
+  </body>
+</html>

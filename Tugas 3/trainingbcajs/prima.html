@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mentukan Bilangan Prima</title>
+    <script language="JavaScript" type="text/javascript"> 
+    
+    var x,i=0;
+    var bilangan = prompt("Masukkan Bilangan : ");  
+	
+	for(x=2;x<=bilangan/2;x++){
+		if(bilangan%x==0){
+			i++;
+		}
+	}
+
+	if(i>0 || bilangan<2) {
+		document.write(bilangan + " Termasuk Bukan Bilangan Prima");
+	}
+	else {
+		document.write(bilangan + " Termasuk Bilangan Prima");
+	}
+    </script> 
+</head>
+<body>
+
+</body>
+</html>

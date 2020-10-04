@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="materialize.css">   
+  </head>
+  <body class="row" style="padding-top: 60px;">
+    
+    <div class="col s8 push-s2" style="padding: 60px 30px 30px 60px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-bottom: 3px blue solid;">
+      <h4>Pengkonversi suhu</h4>
+      <div class="col s6">
+        <input oninput="generate()" type="text" class="col s12" id="nilai" placeholder="Insert Suhu">
+        <select onchange="generate()" id="satuanAwal" class="col s12 browser-default">
+          <option value="" selected disabled>Pilih suhu awal</option>
+          <option value="r">Reamure</option>
+          <option value="c">Celcius</option>
+          <option value="f">Farenheit</option>
+          <option value="k">Kelvin</option>
+        </select>
+      </div>
+      <div class="col s6">
+        <input type="text" class="col s12" id="result" placeholder="Result" disabled>
+        <select onchange="generate()" id="satuanAkhir" class="col s12 browser-default">
+          <option value="" selected disabled>Pilih suhu akhir</option>
+          <option value="r">Reamure</option>
+          <option value="c">Celcius</option>
+          <option value="f">Farenheit</option>
+          <option value="k">Kelvin</option>
+        </select>
+      </div>
+    </div>
+    
+    <script>
+      function generate(){
+        var nilai = parseInt(document.getElementById("nilai").value);
+        var satuanAwal = document.getElementById("satuanAwal").value;
+        var satuanAkhir = document.getElementById("satuanAkhir").value;
+        var result = 0;
+
+        if(satuanAwal == "r" && satuanAkhir == "c")
+          result = nilai * 5/4 ;
+        else if(satuanAwal == "r" && satuanAkhir == "f")
+          result = nilai * 9/4  + 32;
+        else if(satuanAwal == "r" && satuanAkhir == "k")
+          result = nilai * 5/4  + 273.15;
+
+        else if(satuanAwal == "c" && satuanAkhir == "r")
+          result = nilai * 4/5 ;
+        else if(satuanAwal == "c" && satuanAkhir == "f")
+          result = nilai * 9/5  + 32;
+        else if(satuanAwal == "c" && satuanAkhir == "k")
+          result = nilai + 273.15;
+        
+        else if(satuanAwal == "f" && satuanAkhir == "r")
+          result = (nilai-32) * 4/9  ;
+        else if(satuanAwal == "f" && satuanAkhir == "c")
+          result = (nilai-32) * 5/9 ;
+        else if(satuanAwal == "f" && satuanAkhir == "k")
+          result = (nilai-32) * 5/9  + 273.15;
+        
+        else if(satuanAwal == "k" && satuanAkhir == "r")
+          result = ( nilai - 273.15) * 9/4 ;
+        else if(satuanAwal == "k" && satuanAkhir == "c")
+          result = (nilai-32) * 5/9 ;
+        else if(satuanAwal == "k" && satuanAkhir == "f")
+          result = ( nilai - 273.15) * 9/5 + 32;
+        
+        document.getElementById("result").value = "Suhu "+result+" "+satuanAkhir;
+
+      }
+    </script>
+    
+  </body>
+</html>

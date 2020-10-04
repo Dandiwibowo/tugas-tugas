@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="materialize.css">   
+  </head>
+  <body class="row" style="padding-top: 60px;">
+    
+    <div class="col s12 m6 l4 push-m3 push-l4" style="padding: 60px 30px 30px 60px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-bottom: 3px blue solid;">
+      <h4>Konversi angka ke huruf</h4>
+      <div class="col s12">
+        <p>Nilai : </p> 
+        <input oninput="generate()" type="text" class="col s12" id="nilai" placeholder="Insert Nilai">
+        <p>Result : </p> 
+        <input type="text" class="col s12" id="result" placeholder="Result">
+        
+      </div>
+      
+    </div>
+    
+    <script>
+      function generate(){
+        var nilai = isNaN(parseInt(document.getElementById("nilai").value)) ? 0: parseInt(document.getElementById("nilai").value) ;
+        var result;
+
+        if (nilai <= 100 && nilai >= 80)
+          result = "A";
+        else if (nilai <= 79 && nilai >= 70)
+          result = "B";
+        else if (nilai <= 69 && nilai >= 60)
+          result = "C";
+        else if (nilai <= 59 && nilai >= 50)
+          result = "D";
+        else if (nilai <= 49 && nilai >= 0)
+          result = "E";
+        else 
+          result = "Invalid value, Please insert in range 0-100";
+        document.getElementById("result").value = result;
+
+      }
+    </script>
+    
+  </body>
+</html>

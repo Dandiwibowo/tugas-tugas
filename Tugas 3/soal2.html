@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="materialize.css">   
+  </head>
+  <body class="row" style="padding-top: 60px;">
+    
+    <div class="col s12 m6 l4 push-m3 push-l4" style="padding: 60px 30px 30px 60px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-bottom: 3px blue solid;">
+      <h4>Penghitung nilai diskon</h4>
+      <div class="col s12">
+        <p>Harga:</p> 
+        <input oninput="generate()" type="text" class="col s12" id="nilai" placeholder="Insert Harga">
+        <p> Diskon :</p>
+        <input oninput="generate()" type="text" class="col s12" id="diskon" placeholder="Insert Diskon">
+        <p>Besar Diskon :</p>
+        <input type="text" class="col s12" id="result" placeholder="Result" disabled>
+        
+      </div>
+      
+    </div>
+    
+    <script>
+      function generate(){
+        var nilai = isNaN(parseInt(document.getElementById("nilai").value)) ? 0: parseInt(document.getElementById("nilai").value) ;
+        var diskon = document.getElementById("diskon").value;
+        var result = nilai * diskon / 100;
+
+        
+        
+        document.getElementById("result").value = "Rp. "+result;
+
+      }
+    </script>
+    
+  </body>
+</html>

@@ -1,0 +1,25 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="responsAPI">
+
+    </div>
+    <script>
+        let getName = ()=> {
+            fetch("http://192.168.43.94/smartroom/API/showUser")
+            .then(response => response.json())
+            .then(result =>{
+                result.data.map((item, index) => {
+                    document.getElementById("responsAPI").innerHTML=`Nama : ${item.data_user.nama} Code Device : ${item.data_device.code}`;
+                })
+            });
+        }
+
+        console.log(getName());
+    </script>
+</body>
+</html>

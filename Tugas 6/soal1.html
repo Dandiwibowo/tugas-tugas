@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="materialize.css">   
+  </head>
+  <body class="row" style="padding-top: 60px;">
+    
+    <div class="col s8 push-s2" style="padding: 60px 30px 30px 60px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-bottom: 3px rgb(0, 140, 255) solid;">
+      <h4>Program Aplikasi Stack</h4>
+
+      <div class="row">
+
+        
+        <div class="col s12 m6 l8">
+          <div class="col s12 input-field">
+            <input type="text" placeholder="New Data 1, New Data 2, ... " id="newData">
+            <label for="diskon" class="active">Insert New Data Here</label>
+          </div>
+
+          <div class="col s12">
+            <div class="btn blue col s6" style="border-radius: 250px;" onclick="doPushData()">push</div>
+            <div class="btn orange col s6" style="border-radius: 250px;" onclick="doPopData()" >pop</div>
+          </div>
+
+          <div class="col s12" style="text-align: center; margin-top: 30px;">
+            <p><b>Your last <span id="ppStat"></span> Data</b></p>
+            <h2 id="dataPP">-</h2>
+          </div>
+        </div>
+        
+        
+
+        <div class="col s12 m6 l4" style="text-align: center; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+          <p>Your Array</p>
+          <ul class="collection with-header" id="listData" style=" height:250px; overflow-y: scroll;">
+            
+          </ul>
+        </div>
+
+
+      </div>
+
+      
+    </div>
+    
+    <script>
+      var myArray = [1,6,3,6,8,3,2,4];
+
+      function myPush(x){
+        myArray[myArray.length]=x;
+      }
+
+      function myPop(){
+        var tempArray = myArray;
+        myArray=[];
+        for (a=0; a<(tempArray.length-1); a++)
+          myPush(tempArray[a]);
+        showData();
+      }
+
+      function doPushData(){
+        var newDataForm = document.getElementById("newData").value;
+        if(newDataForm != ""){
+          var newData = newDataForm.split(",");
+          document.getElementById("ppStat").innerHTML="pushed";
+
+          newData.forEach(element => {
+            document.getElementById("dataPP").innerHTML=element;
+            myPush(element);
+          });
+
+          showData();
+        }
+        else
+          alert("Please write data first");
+      }
+
+      function doPopData(){
+        document.getElementById("ppStat").innerHTML="poped";
+        if (myArray.length==0)
+          document.getElementById("dataPP").innerHTML="Array is empty";
+        else{
+          document.getElementById("dataPP").innerHTML=myArray[myArray.length-1];
+          myPop();
+          showData();
+        }
+      }
+
+      function showData(){
+        var showItem = "";
+        for ( a=(myArray.length-1); a>=0 ; a--){
+          showItem +="<li class='collection-item'>"+myArray[a]+"</li>";
+        }
+        document.getElementById("listData").innerHTML = showItem;
+      }
+
+
+      showData();
+    </script>
+    
+  </body>
+</html>

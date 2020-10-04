@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="materialize.css">   
+  </head>
+  <body class="row" style="padding-top: 60px;">
+    
+    <div class="col s8 push-s2" style="padding: 60px 30px 30px 60px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-bottom: 3px blue solid;">
+      <h4>Pengkonversi suhu</h4>
+      <div class="col s6">
+        <input oninput="generate()" type="text" class="col s12" id="nilai" placeholder="Insert Suhu">
+        <select id="satuanAwal" class="col s12 browser-default">
+          <option value="c" selected>Celcius</option>
+        </select>
+      </div>
+      <div class="col s6">
+        <input type="text" class="col s12" id="result" placeholder="Result" disabled>
+        <select onchange="generate()" id="satuanAkhir" class="col s12 browser-default">
+          <option value="" selected disabled>Pilih suhu akhir</option>
+          <option value="r">Reamure</option>
+          <option value="f">Farenheit</option>
+        </select>
+      </div>
+    </div>
+    
+    <script>
+      function generate(){
+        var nilai = parseInt(document.getElementById("nilai").value);
+        var satuanAkhir = document.getElementById("satuanAkhir").value;
+        var result = 0;
+
+        if(satuanAkhir == "r")
+          result = nilai * 4/5 ;
+        else if(satuanAkhir == "f")
+          result = nilai * 9/5  + 32;
+        
+        document.getElementById("result").value = "Suhu "+result+" "+satuanAkhir;
+
+      }
+    </script>
+    
+  </body>
+</html>

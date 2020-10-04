@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="myTree.js"></script>
+    
+    <input type="text" name="" id="newData">
+    <input type="text" name="" id="newParent">
+    <button onclick="addData()">Submit</button>
+    <div id="viewData"></div>
+
+    <input type="text" name="" id="searchData">
+    <button onclick="searchData()">Search</button>
+    <div>From Parent : <span id="viewData3"></span></div>
+
+
+    <input type="text" name="" id="removeData">
+    <input type="text" name="" id="parentName">
+    <button onclick="removeData()">remove</button>
+    <div id="viewData2"></div>
+   
+    <script>
+        var tree = new Tree('CEO');
+        var myArray = [];
+        tree.add('VP of Happiness', 'CEO', tree.traverseBF);
+        tree.add('VP of Finance', 'CEO', tree.traverseBF);
+        tree.add('VP of Sadness', 'CEO', tree.traverseBF);
+        
+        tree.add('Director of Puppies', 'VP of Finance', tree.traverseBF);
+        tree.add('Manager of Puppies', 'Director of Puppies', tree.traverseBF);
+
+
+        function addData(){
+            var newData = document.getElementById("newData").value;
+            var newParent = document.getElementById("newParent").value;
+
+            tree.add(newData, newParent, tree.traverseBF);
+
+            
+            var myArray = [];
+            
+            tree.traverseBF(function(node) {
+                console.log(node.data)
+                myArray.push(node.data);
+            });
+
+            var fixText = "";
+            myArray.forEach(element => {
+                fixText+="*"+element;
+            });
+
+            document.getElementById("viewData").innerHTML=fixText;
+        }
+        
+        function removeData(){
+            var rmData = document.getElementById("removeData").value;
+            var prntName = document.getElementById("parentName").value;
+            
+            tree.remove(rmData, prntName, tree.traverseBF);
+            myArray=[];
+            tree.traverseBF(function(node) {
+                console.log(node.data)
+                myArray.push(node.data);
+            });
+
+            var fixText = "";
+            myArray.forEach(element => {
+                fixText+="*"+element;
+            });
+
+            document.getElementById("viewData2").innerHTML=fixText;
+
+        }
+
+        function searchData(){
+            var searchData = document.getElementById("searchData").value;
+            var fixText;
+            tree.contains(function(node){
+                if (node.data === searchData) {
+                    console.log(node);
+                    fixText=node;
+                }
+            }, tree.traverseBF);
+            
+            var parent = fixText["parent"]["data"];
+            document.getElementById("viewData3").innerHTML=parent;
+        }
+    </script>
+</body>
+</html>

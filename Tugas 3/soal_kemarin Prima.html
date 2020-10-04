@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="materialize.css">   
+  </head>
+  <body class="row" style="padding-top: 60px;">
+    
+    <div class="col s12 m6 l4 push-m3 push-l4" style="padding: 60px 30px 30px 60px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-bottom: 3px blue solid;">
+      <h4>Pengecek bilangan prima</h4>
+      <div class="col s12">
+        <p>Nilai : </p> 
+        <input oninput="generate()" type="text" class="col s12" id="nilai" placeholder="Insert Nilai">
+        <input type="text" class="col s12" id="result" placeholder="Result" disabled>
+        
+      </div>
+      
+    </div>
+    
+    <script>
+      function generate(){
+        var nilai = isNaN(parseInt(document.getElementById("nilai").value)) ? 0: parseInt(document.getElementById("nilai").value) ;
+        var flag = 1;
+        if (nilai %2 == 0){
+          if(nilai != 2)
+            flag = 0;
+        }
+        else{
+          var a = 2;
+          while(a < Math.sqrt(nilai) && flag == 1){
+            if(nilai%a == 0)
+              flag = 0;
+            a++;
+          }
+        }
+        var result = flag==1 ? "Prima" : "Bukan Prima";
+
+        document.getElementById("result").value = result;
+
+      }
+    </script>
+    
+  </body>
+</html>
